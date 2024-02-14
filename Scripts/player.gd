@@ -15,7 +15,7 @@ var current_direction = "Idle"
 @onready var stand_col = $Stand_col
 @onready var jump_col = $Jump_col
 @onready var has_a_landing =$Check_landing
-
+@onready var has_a_landing2 =$Check_landing2
 
 
 func _ready():
@@ -24,22 +24,33 @@ func _ready():
 	
 	
 func _physics_process(delta):
-	
+	update_direction()
 	current_gravity()
 	Player_movement()
 	animation_player()
 	check_bullet_direction()
 	
-	if has_a_landing.is_colliding():
+	if has_a_landing.is_colliding() or has_a_landing2.is_colliding:
 		
 		stand_col.disabled =  false
 		jump_col.disabled = true
+		
 	
 	movement = movement.normalized() * speed * delta
 	move_and_slide()
 	
 	
-	
+func update_direction():
+	var LEFT = Input.is_action_pressed("ui_left")
+	var RIGHT = Input.is_action_pressed("ui_right")
+
+	if LEFT and !RIGHT:
+		current_direction = "Left"
+	elif RIGHT and !LEFT:
+		current_direction = "Right"
+	else:
+		current_direction = "Idle"
+
 func Player_movement():
 	
 	var LEFT = Input.is_action_pressed("ui_left")
@@ -61,7 +72,7 @@ func Player_movement():
 		
 	if JUMP and is_on_floor():
 		
-		fall_vel -= jump_height
+		velocity.y -= jump_height
 		
 	if Input.is_action_just_pressed("fire_weapon") :##and current_direction !="Idle":
 		
@@ -69,34 +80,30 @@ func Player_movement():
 		
 func check_bullet_direction():
 	if current_direction == "Left":
-		bullet_marker.position == Vector2(-1,1)
+		bullet_marker.position == Vector2(-1,0)
 		bullet_direction.x = -1
 
 	if current_direction == "Right":
-		bullet_marker.position == Vector2(-1,1)
+		bullet_marker.position == Vector2(-1,0)
 		bullet_direction.x = 1
 
 func animation_player():
-	
-	if movement.x == -1:
-		
-		stand_col.position = Vector2(4,1)
-		current_direction = "Left"
-		
-	if movement.x == 1:
-		
-		stand_col.position = Vector2(-1,1)
-		current_direction = "Right"
-		
-	if movement.x == -1 and !is_on_floor():
-			jump_col.disabled = false
-			stand_col.disabled = true
+	print("Current Direction: ", current_direction)
+	if !is_on_floor():
+		if current_direction == "Left":
 			anim.play("Jump_Left")
-			
-	if movement.x == 1 and !is_on_floor():
-			jump_col.disabled = false
-			stand_col.disabled = true
-			anim.play_backwards("Jump_Right")
+		else:
+			anim.play("Jump_Right")
+	elif movement.x != 0:
+		if current_direction == "Left":
+			anim.play("Run_Left")
+		else:
+			anim.play("Run_Right")
+	else:
+		if current_direction == "Left":
+			anim.play("Idle_Left")
+		else:
+			anim.play("Idle_Right")
 			
 	check_direction()
 			
@@ -115,14 +122,14 @@ func check_direction():
 			
 			anim.play("Idle_Left")
 			
-			if !is_on_floor:
+			if !is_on_floor():
 				anim.play("Jump_Left")
 				
 		if current_direction == "Right":
 			
 			anim.play("Idle_Right")
 			
-			if !is_on_floor:
+			if !is_on_floor():
 				anim.play("Jump_Right")
 				
 	

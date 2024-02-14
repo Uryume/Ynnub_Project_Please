@@ -7,7 +7,7 @@
 position = Vector2(-60, -40)
 
 [node name="Player" parent="." instance=ExtResource("1_wetgi")]
-position = Vector2(124, 145)
+position = Vector2(120, 59)
 
-[node name="Node2D" parent="." instance=ExtResource("2_pkady")]
-position = Vector2(204, 40)
+[node name="Tilemap" parent="." instance=ExtResource("2_pkady")]
+position = Vector2(205, -93)

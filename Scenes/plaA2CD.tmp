@@ -331,7 +331,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odb7f"]
-size = Vector2(9, 16)
+size = Vector2(11, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_snn1x"]
 size = Vector2(9, 9)
@@ -343,7 +343,7 @@ script = ExtResource("1_r640v")
 [node name="Ynnub_anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pd533")
 animation = &"Idle_Left"
-frame_progress = 0.589811
+frame_progress = 0.425206
 
 [node name="Stand_col" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)

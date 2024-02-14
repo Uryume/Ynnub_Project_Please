@@ -331,7 +331,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odb7f"]
-size = Vector2(9, 16)
+size = Vector2(7, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_snn1x"]
 size = Vector2(9, 9)
@@ -342,8 +342,7 @@ script = ExtResource("1_r640v")
 
 [node name="Ynnub_anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pd533")
-animation = &"Idle_Left"
-frame_progress = 0.589811
+animation = &"Idle_Right"
 
 [node name="Stand_col" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
@@ -354,11 +353,11 @@ position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_snn1x")
 
 [node name="Check_landing" type="RayCast2D" parent="."]
-position = Vector2(4, 1)
+position = Vector2(1, 1)
 target_position = Vector2(0, 14)
 
 [node name="Check_landing2" type="RayCast2D" parent="."]
-position = Vector2(-6, 1)
+position = Vector2(-3, 1)
 target_position = Vector2(0, 14)
 
 [node name="Bullet_exit_pos" type="Marker2D" parent="."]
