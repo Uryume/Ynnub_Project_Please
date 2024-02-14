@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
-@onready var loading_bullets = preload("res://bullets.tscn")
+@onready var loading_bullets = preload("res://Scenes/bullets.tscn")
 var movement = Vector2()
+var bullet_direction = Vector2()
 var speed = 100
 var jump_height = 2500
 var fall_vel = 1
 var current_direction = "Idle"
+
+@onready var bullet_marker =$Bullet_exit_pos
 
 @onready var anim = $Ynnub_anim
 
@@ -25,6 +28,7 @@ func _physics_process(delta):
 	current_gravity()
 	Player_movement()
 	animation_player()
+	check_bullet_direction()
 	
 	if has_a_landing.is_colliding():
 		
@@ -59,10 +63,18 @@ func Player_movement():
 		
 		fall_vel -= jump_height
 		
-	if Input.is_action_just_pressed("fire_weapon"):
+	if Input.is_action_just_pressed("fire_weapon") :##and current_direction !="Idle":
 		
 		fire_weapon()
+		
+func check_bullet_direction():
+	if current_direction == "Left":
+		bullet_marker.position == Vector2(-1,1)
+		bullet_direction.x = -1
 
+	if current_direction == "Right":
+		bullet_marker.position == Vector2(-1,1)
+		bullet_direction.x = 1
 
 func animation_player():
 	
@@ -135,7 +147,18 @@ func current_gravity():
 func fire_weapon():
 	
 	var get_bullets = loading_bullets.instantiate()
-	add_child(get_bullets)
+	
+	if current_direction =="Left":
+		
+		get_bullets.check_direction(bullet_direction.x)
+		
+	if current_direction =="Right":
+		
+		get_bullets.check_direction(bullet_direction.x)
+		
+	get_parent().add_child(get_bullets)
+	
+	get_bullets.position = bullet_marker.global_position
 	
 func swing_weapon():
 	
