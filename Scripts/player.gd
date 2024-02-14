@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-
+@onready var loading_bullets = preload("res://bullets.tscn")
 var movement = Vector2()
 var speed = 100
 var jump_height = 2500
@@ -42,7 +42,6 @@ func Player_movement():
 	var RIGHT = Input.is_action_pressed("ui_right")
 	var JUMP = Input.is_action_just_pressed("ui_accept")
 	
-	var DOWN = Input.is_action_just_pressed("down")
 	var UP = Input.is_action_just_pressed("ui_up")
 	
 	movement.x = -int(LEFT) + int(RIGHT)
@@ -59,6 +58,10 @@ func Player_movement():
 	if JUMP and is_on_floor():
 		
 		fall_vel -= jump_height
+		
+	if Input.is_action_just_pressed("fire_weapon"):
+		
+		fire_weapon()
 
 
 func animation_player():
@@ -100,10 +103,16 @@ func check_direction():
 			
 			anim.play("Idle_Left")
 			
+			if !is_on_floor:
+				anim.play("Jump_Left")
+				
 		if current_direction == "Right":
 			
 			anim.play("Idle_Right")
-	
+			
+			if !is_on_floor:
+				anim.play("Jump_Right")
+				
 	
 func current_gravity():
 	
@@ -125,7 +134,8 @@ func current_gravity():
 		
 func fire_weapon():
 	
-	pass
+	var get_bullets = loading_bullets.instantiate()
+	add_child(get_bullets)
 	
 func swing_weapon():
 	
