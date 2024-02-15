@@ -23,7 +23,7 @@ var bullet_direction = Vector2()
 @onready var healthbar = $Healthbar
 
 func _ready():
-	
+	GameManager.player =self
 	var health = 100
 	
 	
@@ -183,3 +183,5 @@ func fire_weapon():
 func swing_weapon():
 	
 	pass
+func die():
+	GameManager.respawn_player()

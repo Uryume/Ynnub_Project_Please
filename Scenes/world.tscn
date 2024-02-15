@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djnatm1wo05xo"]
+[gd_scene load_steps=20 format=3 uid="uid://djnatm1wo05xo"]
 
 [ext_resource type="PackedScene" uid="uid://c6s1b6ub8jqbm" path="res://Scenes/player.tscn" id="1_wetgi"]
 [ext_resource type="PackedScene" uid="uid://lyd80bymcnn7" path="res://Scenes/Tilemap.tscn" id="2_pkady"]
@@ -6,7 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://ckbll66vkckdy" path="res://healthbar.tscn" id="4_w185f"]
 [ext_resource type="Texture2D" uid="uid://dhirnqush1iap" path="res://Sprites/Sprite-0002.png" id="4_yumx7"]
 [ext_resource type="Texture2D" uid="uid://c44hp2kcegy82" path="res://Sprites/Health.png" id="5_fb04d"]
+[ext_resource type="Script" path="res://Scenes/UIManager.gd" id="5_uanqk"]
+[ext_resource type="Texture2D" uid="uid://decmagrkpff3k" path="res://Sprites/Coin.png" id="7_lb346"]
 [ext_resource type="PackedScene" uid="uid://dq2t5f0qaa1vh" path="res://Scenes/spike.tscn" id="7_qnqd2"]
+[ext_resource type="PackedScene" uid="uid://cl3yix7mtxy53" path="res://Scenes/checkpoint.tscn" id="8_mdqno"]
+[ext_resource type="PackedScene" uid="uid://cuwpnj8lxmmxd" path="res://Scenes/coin.tscn" id="9_286jm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fp8wp"]
 texture = ExtResource("3_calw5")
@@ -211,6 +215,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n5qm"]
+atlas = ExtResource("7_lb346")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ekfrs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n5qm")
+}],
+"loop": true,
+"name": &"Coin_Icon",
+"speed": 5.0
+}]
+
 [node name="World" type="Node2D"]
 position = Vector2(-60, -40)
 
@@ -243,10 +262,11 @@ position = Vector2(120, 59)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UIManager" type="CanvasLayer" parent="."]
 layer = 10
+script = ExtResource("5_uanqk")
 
-[node name="Healthbar" parent="CanvasLayer" instance=ExtResource("4_w185f")]
+[node name="Healthbar" parent="UIManager" instance=ExtResource("4_w185f")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -259,10 +279,40 @@ offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UIManager"]
 position = Vector2(14, 127)
 scale = Vector2(1.75, 1.625)
 sprite_frames = SubResource("SpriteFrames_yhj64")
 
+[node name="Coin Icon" type="AnimatedSprite2D" parent="UIManager"]
+z_index = 1
+position = Vector2(233, 129)
+sprite_frames = SubResource("SpriteFrames_ekfrs")
+animation = &"Coin_Icon"
+
+[node name="CoinDisplay" type="Label" parent="UIManager/Coin Icon"]
+offset_left = 8.0
+offset_top = -12.0
+offset_right = 48.0
+offset_bottom = 11.0
+text = "0"
+
 [node name="Spike" parent="." instance=ExtResource("7_qnqd2")]
 position = Vector2(-260, 171)
+
+[node name="Checkpoint" parent="." instance=ExtResource("8_mdqno")]
+position = Vector2(-78, 140)
+
+[node name="Coin_Holder" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(107, 117)
+
+[node name="Coin2" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(140, 117)
+
+[node name="Coin3" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(10, 86)
+
+[node name="Coin4" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(53, 86)

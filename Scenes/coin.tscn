@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://cuwpnj8lxmmxd"]
+
+[ext_resource type="Script" path="res://Scripts/coin.gd" id="1_2mn4s"]
+[ext_resource type="Texture2D" uid="uid://decmagrkpff3k" path="res://Sprites/Coin.png" id="2_23vrj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbuov"]
+atlas = ExtResource("2_23vrj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebqkr"]
+atlas = ExtResource("2_23vrj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cu1pc"]
+atlas = ExtResource("2_23vrj")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbojg"]
+atlas = ExtResource("2_23vrj")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5wjn"]
+atlas = ExtResource("2_23vrj")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cytm7"]
+atlas = ExtResource("2_23vrj")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbjag"]
+atlas = ExtResource("2_23vrj")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1pbqr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbuov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebqkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cu1pc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbojg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5wjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cytm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbjag")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u4u2f"]
+radius = 7.0
+
+[node name="Coin" type="Node2D"]
+script = ExtResource("1_2mn4s")
+
+[node name="CoinSpin" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1pbqr")
+animation = &"Spin"
+frame_progress = 0.89348
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_u4u2f")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
