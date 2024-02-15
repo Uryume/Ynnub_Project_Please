@@ -1,10 +1,11 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var loading_bullets = preload("res://Scenes/bullets.tscn")
 var movement = Vector2.ZERO
 var speed = 100
 var jumps_left = 2
-var jump_height = 1900
+var jump_height = 2000
 var fall_vel = 1
 
 var current_direction = "Idle"
