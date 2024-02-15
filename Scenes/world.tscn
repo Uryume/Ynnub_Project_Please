@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://djnatm1wo05xo"]
+[gd_scene load_steps=21 format=3 uid="uid://djnatm1wo05xo"]
 
 [ext_resource type="PackedScene" uid="uid://c6s1b6ub8jqbm" path="res://Scenes/player.tscn" id="1_wetgi"]
 [ext_resource type="PackedScene" uid="uid://lyd80bymcnn7" path="res://Scenes/Tilemap.tscn" id="2_pkady"]
@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://ckbll66vkckdy" path="res://healthbar.tscn" id="4_w185f"]
 [ext_resource type="Texture2D" uid="uid://dhirnqush1iap" path="res://Sprites/Sprite-0002.png" id="4_yumx7"]
 [ext_resource type="Texture2D" uid="uid://c44hp2kcegy82" path="res://Sprites/Health.png" id="5_fb04d"]
-[ext_resource type="Script" path="res://Scenes/UIManager.gd" id="5_uanqk"]
+[ext_resource type="Script" path="res://Scripts/UIManager.gd" id="5_uanqk"]
 [ext_resource type="Texture2D" uid="uid://decmagrkpff3k" path="res://Sprites/Coin.png" id="7_lb346"]
 [ext_resource type="PackedScene" uid="uid://dq2t5f0qaa1vh" path="res://Scenes/spike.tscn" id="7_qnqd2"]
 [ext_resource type="PackedScene" uid="uid://cl3yix7mtxy53" path="res://Scenes/checkpoint.tscn" id="8_mdqno"]
 [ext_resource type="PackedScene" uid="uid://cuwpnj8lxmmxd" path="res://Scenes/coin.tscn" id="9_286jm"]
+[ext_resource type="PackedScene" uid="uid://b8buwbqvgd6eu" path="res://Scenes/blue_slime.tscn" id="12_x4vwc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fp8wp"]
 texture = ExtResource("3_calw5")
@@ -235,7 +236,7 @@ position = Vector2(-60, -40)
 
 [node name="Player" parent="." instance=ExtResource("1_wetgi")]
 z_index = 1
-position = Vector2(120, 59)
+position = Vector2(24, 88)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -258,7 +259,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(2490434, 131072, 7, 2490435, 131072, 7, 2490438, 131072, 7, 2490439, 131072, 7, 2490443, 131072, 7, 2490446, 131072, 7, 2490448, 131072, 7)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(120, 59)
+position = Vector2(24, 88)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
@@ -301,18 +302,33 @@ text = "0"
 position = Vector2(-260, 171)
 
 [node name="Checkpoint" parent="." instance=ExtResource("8_mdqno")]
-position = Vector2(-78, 140)
+position = Vector2(26, 92)
 
 [node name="Coin_Holder" type="Node2D" parent="."]
 
 [node name="Coin" parent="Coin_Holder" instance=ExtResource("9_286jm")]
-position = Vector2(107, 117)
+position = Vector2(159, 61)
 
 [node name="Coin2" parent="Coin_Holder" instance=ExtResource("9_286jm")]
-position = Vector2(140, 117)
+position = Vector2(28, 71)
 
 [node name="Coin3" parent="Coin_Holder" instance=ExtResource("9_286jm")]
-position = Vector2(10, 86)
+position = Vector2(228, 66)
 
 [node name="Coin4" parent="Coin_Holder" instance=ExtResource("9_286jm")]
-position = Vector2(53, 86)
+position = Vector2(329, 61)
+
+[node name="BlueSlime2" parent="." instance=ExtResource("12_x4vwc")]
+position = Vector2(-174, 120)
+
+[node name="BlueSlime3" parent="." instance=ExtResource("12_x4vwc")]
+position = Vector2(-90, 38)
+
+[node name="BlueSlime4" parent="." instance=ExtResource("12_x4vwc")]
+position = Vector2(-178, -27)
+
+[node name="BlueSlime5" parent="." instance=ExtResource("12_x4vwc")]
+position = Vector2(127, 72)
+
+[node name="BlueSlime6" parent="." instance=ExtResource("12_x4vwc")]
+position = Vector2(276, 69)

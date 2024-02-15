@@ -1,5 +1,4 @@
 extends CharacterBody2D
-class_name Player
 
 @onready var loading_bullets = preload("res://Scenes/bullets.tscn")
 var movement = Vector2.ZERO
@@ -24,20 +23,14 @@ var bullet_direction = Vector2()
 
 @export var attacking = false
 
-func _ready():
-	GameManager.player =self
-	
 func _process(delta):
 	if Input.is_action_just_pressed("attack"):
+		transform
 		attack()
-	
-	
 	
 func _physics_process(delta):
 	update_direction()
-	current_gravity()
 	Player_movement()
-	animation_player()
 	check_bullet_direction()
 	
 	if has_a_landing.is_colliding() or has_a_landing2.is_colliding:
@@ -105,96 +98,21 @@ func attack():
 	var overlapping_objects = $AttackArea.get_overlapping_areas()
 	
 	for area in overlapping_objects:
-		var parent = area.get_parent()
-		print(parent.name)
+		if area.get_parent().is_in_group("Enemies"):
+			area.get_parent().die()
 		
 	attacking = true
 	anim.play("Attack_Right")
-	#attacking = false
 
-func animation_player():
-	if !attacking:
-		if !is_on_floor():
-			if current_direction == "Left":
-				anim.play("Jump_Left")
-			else:
-				anim.play("Jump_Right")
-		elif movement.x != 0:
-			if current_direction == "Left":
-				anim.play("Run_Left")
-			else:
-				anim.play("Run_Right")
-		else:
-			if current_direction == "Left":
-				anim.play("Idle_Left")
-			else:
-				anim.play("Idle_Right")
-			
-	check_direction()
-			
-func check_direction():
-	if current_direction == "Left"  and is_on_floor():
-		
-		anim.play("Run_Left")
-		
-	if current_direction == "Right"  and is_on_floor():
-		
-		anim.play("Run_Right")
-		
-	if movement == Vector2.ZERO:
-		
-		if current_direction == "Left":
-			
-			anim.play("Idle_Left")
-			
-			if !is_on_floor():
-				anim.play("Jump_Left")
-				
-		if current_direction == "Right":
-			
-			anim.play("Idle_Right")
-			
-			if !is_on_floor():
-				anim.play("Jump_Right")
-				
 	
-func current_gravity():
-	
-	var new_gravity = gravity_force.new()
-	
-	velocity.y = fall_vel
-	
-	if !is_on_floor():
-		
-		fall_vel += new_gravity.gravity_str
-		
-	if is_on_floor():
-		
-		fall_vel = 4
-		
-	if fall_vel >= new_gravity.terminal_vel:
-		
-		fall_vel = new_gravity.terminal_vel
-		
 func fire_weapon():
-	
 	var get_bullets = loading_bullets.instantiate()
-	
 	if current_direction =="Left":
-		
 		get_bullets.check_direction(bullet_direction.x)
-		
 	if current_direction =="Right":
-		
 		get_bullets.check_direction(bullet_direction.x)
-		
-	
 	get_parent().add_child(get_bullets)
 
 	get_bullets.position = bullet_marker.global_position
 	
-func swing_weapon():
-	
-	pass
-func die():
-	GameManager.respawn_player()
+

@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8buwbqvgd6eu"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies.gd" id="1_w7c3u"]
+[ext_resource type="Texture2D" uid="uid://c44hp2kcegy82" path="res://Sprites/Health.png" id="2_crxhm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wt53m"]
+atlas = ExtResource("2_crxhm")
+region = Rect2(0, 240, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5qk6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wt53m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxjk8"]
+size = Vector2(16, 11)
+
+[node name="BlueSlime" type="CharacterBody2D" groups=["Enemies"]]
+collision_layer = 2
+script = ExtResource("1_w7c3u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5qk6f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_sxjk8")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(1.12226, 1.22046)
+collision_layer = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_sxjk8")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-5, 0)
+target_position = Vector2(0, 11)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

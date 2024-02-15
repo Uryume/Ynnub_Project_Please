@@ -1,16 +1,16 @@
 [gd_scene load_steps=56 format=3 uid="uid://c6s1b6ub8jqbm"]
 
+[ext_resource type="Script" path="res://Scripts/mainplayer.gd" id="1_1mmw7"]
 [ext_resource type="Texture2D" uid="uid://bgi4iamqagn7" path="res://Sprites/Ynnub-Animations.png" id="1_84kk7"]
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_r640v"]
 [ext_resource type="Texture2D" uid="uid://bb4tpcew82ky2" path="res://Sprites/MeleeAttack.png" id="2_j1n32"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6yt3y"]
-atlas = ExtResource("2_j1n32")
-region = Rect2(0, 16, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4gxc"]
 atlas = ExtResource("2_j1n32")
 region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yt3y"]
+atlas = ExtResource("2_j1n32")
+region = Rect2(0, 16, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dlk65"]
 atlas = ExtResource("2_j1n32")
@@ -196,10 +196,10 @@ region = Rect2(80, 16, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6yt3y")
+"texture": SubResource("AtlasTexture_p4gxc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p4gxc")
+"texture": SubResource("AtlasTexture_6yt3y")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dlk65")
@@ -328,7 +328,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Jump_Right",
-"speed": 12.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -369,6 +369,11 @@ animations = [{
 "loop": true,
 "name": &"Run_Right",
 "speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_snn1x"]
@@ -385,12 +390,13 @@ b = Vector2(8, 0)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(63, 36)
-script = ExtResource("1_r640v")
+collision_layer = 2
+script = ExtResource("1_1mmw7")
 
 [node name="Ynnub_anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pd533")
 animation = &"Attack_Right"
-frame_progress = 0.842408
+autoplay = "Idle_Right"
 
 [node name="Jump_col" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)
