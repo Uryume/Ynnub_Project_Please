@@ -2,10 +2,12 @@ extends CharacterBody2D
 class_name Player
 
 @onready var animation = $Ynnub_anim
+@onready var animating = $AnimationPlayer
 
 @export var speed = 150.0
 @export var jump_velocity = -200.0
 @export var attacking = false
+
 var current_direction = "right"
 var jumps_left = 2
 
@@ -65,11 +67,8 @@ func attack():
 	var overlapping_objects =$AttackArea.get_overlapping_areas()
 	
 	for area in overlapping_objects:
-		if area.get_parent().is_in_group("Enemies"):
-			area.get_parent().die()
-	
-		attacking = true
-	animation.play("Attack_Right")
+		var parent = area.get_parent()
+		print(parent.name)
 	
 	if current_direction == "right":
 		$Ynnub_anim.position = Vector2(7,0)
@@ -77,6 +76,8 @@ func attack():
 	if current_direction == "left":
 		$Ynnub_anim.position = Vector2(-7,0)
 		$AttackArea.position = Vector2(-14,0)
-
+	
+	attacking = true
+	animation.play("Attack_Right")
 func die():
 	GameManager.respawn_player()

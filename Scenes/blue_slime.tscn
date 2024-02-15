@@ -19,7 +19,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxjk8"]
-size = Vector2(16, 11)
+size = Vector2(17.0196, 12.5)
 
 [node name="BlueSlime" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 2
@@ -29,17 +29,16 @@ script = ExtResource("1_w7c3u")
 sprite_frames = SubResource("SpriteFrames_5qk6f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_sxjk8")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(0, -1)
 scale = Vector2(1.12226, 1.22046)
 collision_layer = 2
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, 2)
+position = Vector2(0, 1.63873)
 shape = SubResource("RectangleShape2D_sxjk8")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
