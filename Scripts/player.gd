@@ -22,9 +22,14 @@ var bullet_direction = Vector2()
 
 @onready var healthbar = $Healthbar
 
+@export var attacking = false
+
 func _ready():
 	GameManager.player =self
-	var health = 100
+	
+func _process(delta):
+	if Input.is_action_just_pressed("attack"):
+		attack()
 	
 	
 	
@@ -95,27 +100,35 @@ func check_bullet_direction():
 	if current_direction == "Right":
 		bullet_marker.position = Vector2(55,35)
 		bullet_direction.x = 1
-
-func _set_health(value):
-	pass
+		
+func attack():
+	var overlapping_objects = $AttackArea.get_overlapping_areas()
+	
+	for area in overlapping_objects:
+		var parent = area.get_parent()
+		print(parent.name)
+		
+	attacking = true
+	anim.play("Attack_Right")
+	#attacking = false
 
 func animation_player():
-	print("Current Direction: ", current_direction)
-	if !is_on_floor():
-		if current_direction == "Left":
-			anim.play("Jump_Left")
+	if !attacking:
+		if !is_on_floor():
+			if current_direction == "Left":
+				anim.play("Jump_Left")
+			else:
+				anim.play("Jump_Right")
+		elif movement.x != 0:
+			if current_direction == "Left":
+				anim.play("Run_Left")
+			else:
+				anim.play("Run_Right")
 		else:
-			anim.play("Jump_Right")
-	elif movement.x != 0:
-		if current_direction == "Left":
-			anim.play("Run_Left")
-		else:
-			anim.play("Run_Right")
-	else:
-		if current_direction == "Left":
-			anim.play("Idle_Left")
-		else:
-			anim.play("Idle_Right")
+			if current_direction == "Left":
+				anim.play("Idle_Left")
+			else:
+				anim.play("Idle_Right")
 			
 	check_direction()
 			

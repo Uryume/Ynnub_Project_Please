@@ -6,7 +6,7 @@ var coins : int
 
 var current_checkpoint : Checkpoint
 
-var player:Player
+var player : Player
 
 func respawn_player():
 	if current_checkpoint != null:

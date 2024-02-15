@@ -48,10 +48,9 @@ script = ExtResource("1_cwlut")
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fcd8f")
 animation = &"Activated"
-frame_progress = 0.0532781
+frame_progress = 0.928973
 
 [node name="Area2D" type="Area2D" parent="."]
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2.25, -1)

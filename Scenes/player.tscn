@@ -1,7 +1,28 @@
-[gd_scene load_steps=49 format=3 uid="uid://c6s1b6ub8jqbm"]
+[gd_scene load_steps=56 format=3 uid="uid://c6s1b6ub8jqbm"]
 
 [ext_resource type="Texture2D" uid="uid://bgi4iamqagn7" path="res://Sprites/Ynnub-Animations.png" id="1_84kk7"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_r640v"]
+[ext_resource type="Texture2D" uid="uid://bb4tpcew82ky2" path="res://Sprites/MeleeAttack.png" id="2_j1n32"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yt3y"]
+atlas = ExtResource("2_j1n32")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4gxc"]
+atlas = ExtResource("2_j1n32")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlk65"]
+atlas = ExtResource("2_j1n32")
+region = Rect2(64, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17rad"]
+atlas = ExtResource("2_j1n32")
+region = Rect2(0, 48, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wpei"]
+atlas = ExtResource("2_j1n32")
+region = Rect2(32, 48, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_knrpp"]
 atlas = ExtResource("1_84kk7")
@@ -175,6 +196,26 @@ region = Rect2(80, 16, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_6yt3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4gxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlk65")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17rad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wpei")
+}],
+"loop": true,
+"name": &"Attack_Right",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_knrpp")
 }, {
 "duration": 1.0,
@@ -339,14 +380,17 @@ size = Vector2(9, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ni6c"]
 size = Vector2(9.25, 16)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_i2n4e"]
+b = Vector2(8, 0)
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(63, 36)
 script = ExtResource("1_r640v")
 
 [node name="Ynnub_anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pd533")
-animation = &"Idle_Right"
-frame_progress = 0.125168
+animation = &"Attack_Right"
+frame_progress = 0.842408
 
 [node name="Jump_col" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)
@@ -376,3 +420,11 @@ shape = SubResource("RectangleShape2D_odb7f")
 [node name="Area2D_Collision" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.375, 0)
 shape = SubResource("RectangleShape2D_0ni6c")
+
+[node name="AttackArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-4, 2)
+scale = Vector2(2, 2)
+shape = SubResource("SegmentShape2D_i2n4e")
