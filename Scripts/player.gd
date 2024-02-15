@@ -1,26 +1,30 @@
 extends CharacterBody2D
 
 @onready var loading_bullets = preload("res://Scenes/bullets.tscn")
-var movement = Vector2()
-var bullet_direction = Vector2()
+var movement = Vector2.ZERO
 var speed = 100
-var jump_height = 2500
+var jumps_left = 2
+var jump_height = 1900
 var fall_vel = 1
+
 var current_direction = "Idle"
+var bullet_direction = Vector2()
 
 @onready var bullet_marker =$Bullet_exit_pos
 
 @onready var anim = $Ynnub_anim
-
+@onready var coyote_timer = $CoyoteTimer
 @onready var stand_col = $Stand_col
 @onready var jump_col = $Jump_col
 @onready var has_a_landing =$Check_landing
 @onready var has_a_landing2 =$Check_landing2
 
+@onready var healthbar = $Healthbar
 
 func _ready():
 	
-	pass
+	var health = 100
+	
 	
 	
 func _physics_process(delta):
@@ -35,10 +39,13 @@ func _physics_process(delta):
 		stand_col.disabled =  false
 		jump_col.disabled = true
 		
-	
+		
 	movement = movement.normalized() * speed * delta
-	move_and_slide()
+	var was_on_floor = is_on_floor()
 	
+	move_and_slide()
+	if !is_on_floor() and was_on_floor:
+		pass
 	
 func update_direction():
 	var LEFT = Input.is_action_pressed("ui_left")
@@ -53,26 +60,27 @@ func update_direction():
 
 func Player_movement():
 	
+	if is_on_floor():
+		jumps_left = 2
+		
 	var LEFT = Input.is_action_pressed("ui_left")
 	var RIGHT = Input.is_action_pressed("ui_right")
 	var JUMP = Input.is_action_just_pressed("ui_accept")
 	
-	var UP = Input.is_action_just_pressed("ui_up")
-	
 	movement.x = -int(LEFT) + int(RIGHT)
-	movement.y = -int(JUMP)
+	movement.y = -int(JUMP) *  get_physics_process_delta_time()
 
 	if movement.x != 0:
 		
-		velocity.x = movement.x * speed
-		
+		velocity.x = movement.x * speed 
+
 	else:
-		
 		velocity.x = 0
 		
-	if JUMP and is_on_floor():
+	if JUMP and jumps_left > 0:
 		
 		velocity.y -= jump_height
+		jumps_left -= 1
 		
 	if Input.is_action_just_pressed("fire_weapon") :##and current_direction !="Idle":
 		
@@ -80,12 +88,15 @@ func Player_movement():
 		
 func check_bullet_direction():
 	if current_direction == "Left":
-		bullet_marker.position == Vector2(-1,0)
+		bullet_marker.position = Vector2(45,35)
 		bullet_direction.x = -1
 
 	if current_direction == "Right":
-		bullet_marker.position == Vector2(-1,0)
+		bullet_marker.position = Vector2(55,35)
 		bullet_direction.x = 1
+
+func _set_health(value):
+	pass
 
 func animation_player():
 	print("Current Direction: ", current_direction)
@@ -145,7 +156,7 @@ func current_gravity():
 		
 	if is_on_floor():
 		
-		fall_vel = 5
+		fall_vel = 4
 		
 	if fall_vel >= new_gravity.terminal_vel:
 		
@@ -163,8 +174,9 @@ func fire_weapon():
 		
 		get_bullets.check_direction(bullet_direction.x)
 		
-	get_parent().add_child(get_bullets)
 	
+	get_parent().add_child(get_bullets)
+
 	get_bullets.position = bullet_marker.global_position
 	
 func swing_weapon():
