@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://djnatm1wo05xo"]
+[gd_scene load_steps=28 format=3 uid="uid://djnatm1wo05xo"]
 
 [ext_resource type="PackedScene" uid="uid://c6s1b6ub8jqbm" path="res://Scenes/player.tscn" id="1_wetgi"]
 [ext_resource type="PackedScene" uid="uid://lyd80bymcnn7" path="res://Scenes/Tilemap.tscn" id="2_pkady"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://rg4cj23h1c26" path="res://Scenes/jumppad.tscn" id="14_u4vs4"]
 [ext_resource type="PackedScene" uid="uid://bqdix3lexpu8d" path="res://Scenes/health_up.tscn" id="15_tt13m"]
 [ext_resource type="PackedScene" uid="uid://bisukklr31vls" path="res://Scenes/moving_platform.tscn" id="16_v2xs1"]
+[ext_resource type="PackedScene" uid="uid://cs3e67l3wsnif" path="res://Scenes/key.tscn" id="17_xrxbt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fp8wp"]
 texture = ExtResource("3_calw5")
@@ -457,7 +458,7 @@ position = Vector2(28, 71)
 position = Vector2(228, 66)
 
 [node name="Coin4" parent="Coin_Holder" instance=ExtResource("9_286jm")]
-position = Vector2(329, 61)
+position = Vector2(329, 70)
 
 [node name="BlueSlime" type="Node2D" parent="."]
 
@@ -589,7 +590,7 @@ position = Vector2(-59, 140)
 position = Vector2(196, 91)
 
 [node name="MovingPlatform" parent="." instance=ExtResource("16_v2xs1")]
-position = Vector2(548, 87)
+position = Vector2(550, 121)
 
 [node name="Jumppad_Holder" type="Node2D" parent="."]
 
@@ -607,6 +608,9 @@ position = Vector2(614, 172)
 
 [node name="Jumppad5" parent="Jumppad_Holder" instance=ExtResource("14_u4vs4")]
 position = Vector2(786, 172)
+
+[node name="Key" parent="." instance=ExtResource("17_xrxbt")]
+position = Vector2(387, 71)
 
 [connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/ResumeBox/Resume" to="UIManager" method="_on_resume_pressed"]
 [connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/RestartBox/Restart" to="UIManager" method="_on_restart_pressed"]
