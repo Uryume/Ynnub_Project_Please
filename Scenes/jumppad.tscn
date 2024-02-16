@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://rg4cj23h1c26"]
+
+[ext_resource type="Texture2D" uid="uid://dcjbvjy823gin" path="res://Sprites/mushroom.png" id="1_ty0e6"]
+[ext_resource type="Script" path="res://Scripts/jumppad.gd" id="1_ynjvl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpoqj"]
+atlas = ExtResource("1_ty0e6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4j6ts"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rpoqj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxnu1"]
+size = Vector2(12, 10)
+
+[node name="Jumppad" type="Node2D"]
+script = ExtResource("1_ynjvl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4j6ts")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_cxnu1")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8buwbqvgd6eu"]
+[gd_scene load_steps=7 format=3 uid="uid://b8buwbqvgd6eu"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies.gd" id="1_w7c3u"]
 [ext_resource type="Texture2D" uid="uid://c44hp2kcegy82" path="res://Sprites/Health.png" id="2_crxhm"]
@@ -21,6 +21,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxjk8"]
 size = Vector2(17.0196, 12.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljuka"]
+size = Vector2(16.0391, 11.4711)
+
 [node name="BlueSlime" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 2
 script = ExtResource("1_w7c3u")
@@ -35,11 +38,12 @@ shape = SubResource("RectangleShape2D_sxjk8")
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(0, -1)
 scale = Vector2(1.12226, 1.22046)
-collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, 1.63873)
-shape = SubResource("RectangleShape2D_sxjk8")
+light_mask = 2
+position = Vector2(2.12445e-07, 2.45809)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ljuka")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-5, 0)

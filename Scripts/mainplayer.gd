@@ -17,6 +17,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	GameManager.player =self
 
+
 func _process(delta):
 	if Input.is_action_just_pressed("attack"):
 		attack()
@@ -50,6 +51,10 @@ func _physics_process(delta):
 
 	update_animation()
 	move_and_slide()
+	
+func _input(event):
+	if event.is_action_pressed("ui_down") and is_on_floor():
+		position.y +=30
 
 func update_animation():
 	if !attacking:
@@ -67,8 +72,8 @@ func attack():
 	var overlapping_objects =$AttackArea.get_overlapping_areas()
 	
 	for area in overlapping_objects:
-		var parent = area.get_parent()
-		print(parent.name)
+		if area.get_parent().is_in_group("Enemies"):
+			area.get_parent().die()
 	
 	if current_direction == "right":
 		$Ynnub_anim.position = Vector2(7,0)
@@ -79,5 +84,7 @@ func attack():
 	
 	attacking = true
 	animation.play("Attack_Right")
+	
+
 func die():
 	GameManager.respawn_player()

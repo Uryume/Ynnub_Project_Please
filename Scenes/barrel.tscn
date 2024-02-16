@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://27to5gmaj4re"]
+
+[ext_resource type="Texture2D" uid="uid://dreedne0o24vs" path="res://Sprites/barrel.png" id="1_dvwxk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r701x"]
+size = Vector2(10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smtcm"]
+atlas = ExtResource("1_dvwxk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vsq1x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smtcm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Barrel" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_r701x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vsq1x")
