@@ -292,7 +292,7 @@ position = Vector2(-60, -40)
 
 [node name="Player" parent="." instance=ExtResource("1_wetgi")]
 z_index = 1
-position = Vector2(278, -324)
+position = Vector2(24, 88)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -322,7 +322,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(851953, 655360, 6, 851954, 655360, 6, 851956, 720896, 6, 851955, 655360, 6, 851957, 655360, 6, 851958, 786432, 6, 851959, 720896, 6, 851960, 786432, 6, 851961, 720896, 6, 851962, 655360, 6, 851963, 786432, 6, 851964, 655360, 6, 851965, 786432, 6)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(278, -324)
+position = Vector2(24, 88)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
@@ -410,7 +410,7 @@ text = "Quit
 position = Vector2(26, 92)
 
 [node name="Checkpoint2" parent="." instance=ExtResource("8_mdqno")]
-position = Vector2(799, 172)
+position = Vector2(966, 76)
 
 [node name="Coin_Holder" type="Node2D" parent="."]
 
@@ -476,10 +476,51 @@ position = Vector2(127, 72)
 [node name="BlueSlime6" parent="BlueSlime" instance=ExtResource("12_x4vwc")]
 position = Vector2(276, 69)
 
+[node name="BlueSlime7" parent="BlueSlime" instance=ExtResource("12_x4vwc")]
+position = Vector2(1005, -206)
+
 [node name="Spike_Holder" type="Node2D" parent="."]
 
 [node name="Spike" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
 position = Vector2(-260, 171)
+
+[node name="Spike7" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(512, 171)
+
+[node name="Spike13" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(484, 162)
+rotation = 1.5708
+
+[node name="Spike14" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(484, 145)
+rotation = 1.5708
+
+[node name="Spike15" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(484, 128)
+rotation = 1.5708
+
+[node name="Spike16" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(484, 111)
+rotation = 1.5708
+
+[node name="Spike17" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(484, 93)
+rotation = 1.5708
+
+[node name="Spike8" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(529, 171)
+
+[node name="Spike9" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(546, 171)
+
+[node name="Spike10" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(563, 171)
+
+[node name="Spike11" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(580, 171)
+
+[node name="Spike12" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
+position = Vector2(597, 171)
 
 [node name="Spike2" parent="Spike_Holder" instance=ExtResource("7_qnqd2")]
 position = Vector2(-243, 171)
@@ -544,20 +585,28 @@ position = Vector2(-175, 171)
 [node name="Barrel" parent="." instance=ExtResource("13_mapo7")]
 position = Vector2(-59, 140)
 
-[node name="Jumppad" parent="." instance=ExtResource("14_u4vs4")]
-position = Vector2(485, 172)
-
-[node name="Jumppad2" parent="Jumppad" instance=ExtResource("14_u4vs4")]
-position = Vector2(-737, -48)
-
-[node name="Jumppad3" parent="Jumppad" instance=ExtResource("14_u4vs4")]
-position = Vector2(-562, -128)
-
 [node name="HealthUp" parent="." instance=ExtResource("15_tt13m")]
 position = Vector2(196, 91)
 
 [node name="MovingPlatform" parent="." instance=ExtResource("16_v2xs1")]
-position = Vector2(487, 89)
+position = Vector2(548, 87)
+
+[node name="Jumppad_Holder" type="Node2D" parent="."]
+
+[node name="Jumppad3" parent="Jumppad_Holder" instance=ExtResource("14_u4vs4")]
+position = Vector2(-81, 45)
+
+[node name="Jumppad2" parent="Jumppad_Holder" instance=ExtResource("14_u4vs4")]
+position = Vector2(-247, 124)
+
+[node name="Jumppad" parent="Jumppad_Holder" instance=ExtResource("14_u4vs4")]
+position = Vector2(496, 172)
+
+[node name="Jumppad4" parent="Jumppad_Holder" instance=ExtResource("14_u4vs4")]
+position = Vector2(614, 172)
+
+[node name="Jumppad5" parent="Jumppad_Holder" instance=ExtResource("14_u4vs4")]
+position = Vector2(786, 172)
 
 [connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/ResumeBox/Resume" to="UIManager" method="_on_resume_pressed"]
 [connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/RestartBox/Restart" to="UIManager" method="_on_restart_pressed"]
