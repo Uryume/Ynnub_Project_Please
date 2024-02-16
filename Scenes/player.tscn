@@ -1,8 +1,9 @@
-[gd_scene load_steps=56 format=3 uid="uid://c6s1b6ub8jqbm"]
+[gd_scene load_steps=57 format=3 uid="uid://c6s1b6ub8jqbm"]
 
 [ext_resource type="Script" path="res://Scripts/mainplayer.gd" id="1_1mmw7"]
 [ext_resource type="Texture2D" uid="uid://bgi4iamqagn7" path="res://Sprites/Ynnub-Animations.png" id="1_84kk7"]
 [ext_resource type="Texture2D" uid="uid://bb4tpcew82ky2" path="res://Sprites/MeleeAttack.png" id="2_j1n32"]
+[ext_resource type="PackedScene" uid="uid://dkd2vfxw047yq" path="res://Scenes/dash.tscn" id="4_t2imp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4gxc"]
 atlas = ExtResource("2_j1n32")
@@ -396,18 +397,18 @@ script = ExtResource("1_1mmw7")
 [node name="Ynnub_anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pd533")
 animation = &"Attack_Right"
-frame_progress = 0.287136
+frame_progress = 0.215545
 
 [node name="Jump_col" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_snn1x")
 
-[node name="Check_landing" type="RayCast2D" parent="."]
-position = Vector2(4, 1)
+[node name="Bounce_Raycast" type="RayCast2D" parent="."]
+position = Vector2(4, 2)
 target_position = Vector2(0, 14)
 
-[node name="Check_landing2" type="RayCast2D" parent="."]
-position = Vector2(-6, 1)
+[node name="Bounce_Raycast2" type="RayCast2D" parent="."]
+position = Vector2(-6, 2)
 target_position = Vector2(0, 14)
 
 [node name="Bullet_exit_pos" type="Marker2D" parent="."]
@@ -435,3 +436,5 @@ monitorable = false
 position = Vector2(-4, 2)
 scale = Vector2(2, 2)
 shape = SubResource("SegmentShape2D_i2n4e")
+
+[node name="Dash" parent="." instance=ExtResource("4_t2imp")]

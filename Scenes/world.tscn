@@ -1,9 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://djnatm1wo05xo"]
+[gd_scene load_steps=27 format=3 uid="uid://djnatm1wo05xo"]
 
 [ext_resource type="PackedScene" uid="uid://c6s1b6ub8jqbm" path="res://Scenes/player.tscn" id="1_wetgi"]
 [ext_resource type="PackedScene" uid="uid://lyd80bymcnn7" path="res://Scenes/Tilemap.tscn" id="2_pkady"]
 [ext_resource type="Texture2D" uid="uid://bxdyj7plh6y7y" path="res://Sprites/Zone-1.2-Tilemap.png" id="3_calw5"]
-[ext_resource type="PackedScene" uid="uid://ckbll66vkckdy" path="res://healthbar.tscn" id="4_w185f"]
+[ext_resource type="PackedScene" uid="uid://b8ng2f0kix2nq" path="res://Scenes/healthbar.tscn" id="4_w185f"]
 [ext_resource type="Texture2D" uid="uid://dhirnqush1iap" path="res://Sprites/Sprite-0002.png" id="4_yumx7"]
 [ext_resource type="Texture2D" uid="uid://c44hp2kcegy82" path="res://Sprites/Health.png" id="5_fb04d"]
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="5_uanqk"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://b8buwbqvgd6eu" path="res://Scenes/blue_slime.tscn" id="12_x4vwc"]
 [ext_resource type="PackedScene" uid="uid://27to5gmaj4re" path="res://Scenes/barrel.tscn" id="13_mapo7"]
 [ext_resource type="PackedScene" uid="uid://rg4cj23h1c26" path="res://Scenes/jumppad.tscn" id="14_u4vs4"]
+[ext_resource type="PackedScene" uid="uid://bqdix3lexpu8d" path="res://Scenes/health_up.tscn" id="15_tt13m"]
+[ext_resource type="PackedScene" uid="uid://bisukklr31vls" path="res://Scenes/moving_platform.tscn" id="16_v2xs1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fp8wp"]
 texture = ExtResource("3_calw5")
@@ -290,7 +292,7 @@ position = Vector2(-60, -40)
 
 [node name="Player" parent="." instance=ExtResource("1_wetgi")]
 z_index = 1
-position = Vector2(24, 88)
+position = Vector2(278, -324)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -320,26 +322,13 @@ format = 2
 layer_0/tile_data = PackedInt32Array(851953, 655360, 6, 851954, 655360, 6, 851956, 720896, 6, 851955, 655360, 6, 851957, 655360, 6, 851958, 786432, 6, 851959, 720896, 6, 851960, 786432, 6, 851961, 720896, 6, 851962, 655360, 6, 851963, 786432, 6, 851964, 655360, 6, 851965, 786432, 6)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(24, 88)
+position = Vector2(278, -324)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
 [node name="UIManager" type="CanvasLayer" parent="."]
 layer = 10
 script = ExtResource("5_uanqk")
-
-[node name="Healthbar" parent="UIManager" instance=ExtResource("4_w185f")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -99.0
-offset_top = -11.0
-offset_right = -5.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UIManager"]
 position = Vector2(14, 127)
@@ -359,8 +348,69 @@ offset_right = 48.0
 offset_bottom = 11.0
 text = "0"
 
+[node name="Healthbar" parent="UIManager" instance=ExtResource("4_w185f")]
+offset_left = 136.0
+offset_top = 135.0
+offset_right = -117.0
+offset_bottom = -5.0
+
+[node name="Pause Menu" type="ColorRect" parent="UIManager"]
+visible = false
+custom_minimum_size = Vector2(128, 94)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -61.0
+offset_right = 64.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.243137, 0.141176, 0.0509804, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/Pause Menu"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 122.0
+offset_bottom = 88.0
+
+[node name="ResumeBox" type="HBoxContainer" parent="UIManager/Pause Menu/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="UIManager/Pause Menu/VBoxContainer/ResumeBox"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+text = "Resume"
+
+[node name="RestartBox" type="HBoxContainer" parent="UIManager/Pause Menu/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Restart" type="Button" parent="UIManager/Pause Menu/VBoxContainer/RestartBox"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+text = "Restart
+"
+
+[node name="QuitBox" type="HBoxContainer" parent="UIManager/Pause Menu/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Quit" type="Button" parent="UIManager/Pause Menu/VBoxContainer/QuitBox"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+text = "Quit
+"
+
 [node name="Checkpoint" parent="." instance=ExtResource("8_mdqno")]
 position = Vector2(26, 92)
+
+[node name="Checkpoint2" parent="." instance=ExtResource("8_mdqno")]
+position = Vector2(799, 172)
 
 [node name="Coin_Holder" type="Node2D" parent="."]
 
@@ -371,6 +421,9 @@ position = Vector2(159, 61)
 position = Vector2(-134, 184)
 
 [node name="Coin6" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(-213, 67)
+
+[node name="Coin10" parent="Coin_Holder" instance=ExtResource("9_286jm")]
 position = Vector2(-110, 184)
 
 [node name="Coin7" parent="Coin_Holder" instance=ExtResource("9_286jm")]
@@ -381,6 +434,21 @@ position = Vector2(-65, 184)
 
 [node name="Coin9" parent="Coin_Holder" instance=ExtResource("9_286jm")]
 position = Vector2(-43, 184)
+
+[node name="Coin11" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(-80, -44)
+
+[node name="Coin12" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(-104, -45)
+
+[node name="Coin13" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(-57, -44)
+
+[node name="Coin14" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(-91, -27)
+
+[node name="Coin15" parent="Coin_Holder" instance=ExtResource("9_286jm")]
+position = Vector2(-67, -28)
 
 [node name="Coin2" parent="Coin_Holder" instance=ExtResource("9_286jm")]
 position = Vector2(28, 71)
@@ -478,3 +546,19 @@ position = Vector2(-59, 140)
 
 [node name="Jumppad" parent="." instance=ExtResource("14_u4vs4")]
 position = Vector2(485, 172)
+
+[node name="Jumppad2" parent="Jumppad" instance=ExtResource("14_u4vs4")]
+position = Vector2(-737, -48)
+
+[node name="Jumppad3" parent="Jumppad" instance=ExtResource("14_u4vs4")]
+position = Vector2(-562, -128)
+
+[node name="HealthUp" parent="." instance=ExtResource("15_tt13m")]
+position = Vector2(196, 91)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("16_v2xs1")]
+position = Vector2(487, 89)
+
+[connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/ResumeBox/Resume" to="UIManager" method="_on_resume_pressed"]
+[connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/RestartBox/Restart" to="UIManager" method="_on_restart_pressed"]
+[connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/QuitBox/Quit" to="UIManager" method="_on_quit_pressed"]

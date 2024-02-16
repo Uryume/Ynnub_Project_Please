@@ -1,7 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctfequv08uqs2"]
+[gd_scene load_steps=6 format=3 uid="uid://c5o5acf2s856n"]
 
-[ext_resource type="Script" path="res://Scripts/bullets.gd" id="1_1n2mh"]
 [ext_resource type="Texture2D" uid="uid://dkorgih6gdww6" path="res://Sprites/Bullet.png" id="2_66ptn"]
+
+[sub_resource type="GDScript" id="GDScript_r1mrd"]
+script/source = "extends Area2D
+
+
+var bullet_speed = 10
+var bullet_movement = Vector2()
+var bullet_direction = 1
+var bullet_life = 0
+
+
+func _ready():
+	
+	pass
+
+func check_direction(dir):
+	
+	bullet_direction = dir
+
+func _physics_process(delta):
+	
+	bullet_life += 1
+	
+	bullet_movement.x = bullet_speed * delta * bullet_direction
+	
+	translate(bullet_movement.normalized() * bullet_speed)
+	
+	
+	if bullet_life >= 100:
+		
+		queue_free()
+
+
+func _on_body_entered(body):
+	
+	if !body.name ==\"Player\":
+		queue_free()
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_blchg"]
 atlas = ExtResource("2_66ptn")
@@ -22,7 +59,7 @@ animations = [{
 size = Vector2(2, 2)
 
 [node name="Bullets" type="Area2D"]
-script = ExtResource("1_1n2mh")
+script = SubResource("GDScript_r1mrd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(10, 6)

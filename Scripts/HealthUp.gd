@@ -1,8 +1,9 @@
 extends Node2D
 
-@export var force = -425.0
 
 
 func _on_area_2d_area_entered(area):
 	if area.get_parent() is Player:
-		area.get_parent().velocity.y = force
+		area.get_parent().max_health +=1
+		area.get_parent().health +=1
+		queue_free()

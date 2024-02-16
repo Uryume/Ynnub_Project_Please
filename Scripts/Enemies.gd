@@ -34,4 +34,4 @@ func die():
 
 func _on_hitbox_area_entered(area):
 	if area.get_parent() is Player:
-		area.get_parent().die()
+		area.get_parent().take_damage(2)
