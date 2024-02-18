@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqdix3lexpu8d"]
+[gd_scene load_steps=10 format=3 uid="uid://bqdix3lexpu8d"]
 
 [ext_resource type="Script" path="res://Scripts/HealthUp.gd" id="1_qv5qd"]
 [ext_resource type="Texture2D" uid="uid://cq0iaxi2ke2ge" path="res://Sprites/heart.png" id="2_niyb2"]
@@ -7,31 +7,60 @@
 atlas = ExtResource("2_niyb2")
 region = Rect2(0, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_awo8t"]
+atlas = ExtResource("2_niyb2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukwtn"]
+atlas = ExtResource("2_niyb2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gpdm"]
+atlas = ExtResource("2_niyb2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2f46"]
+atlas = ExtResource("2_niyb2")
+region = Rect2(48, 0, 16, 16)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_rrmi5"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l8ytk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awo8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukwtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gpdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2f46")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6eihe"]
-size = Vector2(10, 9)
+size = Vector2(9, 10)
 
 [node name="HealthUp" type="Node2D"]
 script = ExtResource("1_qv5qd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rrmi5")
+frame_progress = 0.891824
 
 [node name="Area2D" type="Area2D" parent="."]
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 2.5)
+position = Vector2(-0.5, 3)
 shape = SubResource("RectangleShape2D_6eihe")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -99,7 +99,7 @@ func take_damage(damage_amount:int):
 			
 func iframes():
 	can_take_damage = false
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.4).timeout
 	can_take_damage = true
 	
 func attack():
