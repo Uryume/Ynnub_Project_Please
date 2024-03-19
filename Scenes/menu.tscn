@@ -1,0 +1,304 @@
+[gd_scene load_steps=27 format=3 uid="uid://3p160p0bsp2i"]
+
+[ext_resource type="Script" path="res://Menu.gd" id="1_311b3"]
+[ext_resource type="StyleBox" uid="uid://csa2tyka1vtrp" path="res://Styles/yellow.tres" id="2_ll2mf"]
+[ext_resource type="PackedScene" uid="uid://c6s1b6ub8jqbm" path="res://Scenes/player.tscn" id="2_n80jq"]
+[ext_resource type="Texture2D" uid="uid://ccvdiimg6mw0u" path="res://Sprites/Title.png" id="3_5od8k"]
+[ext_resource type="Script" path="res://Scripts/UIManager.gd" id="3_de4id"]
+[ext_resource type="Texture2D" uid="uid://c44hp2kcegy82" path="res://Sprites/Health.png" id="4_u16kd"]
+[ext_resource type="Texture2D" uid="uid://r3iie5gncp1o" path="res://Sprites/key.png" id="5_0dwpm"]
+[ext_resource type="Texture2D" uid="uid://decmagrkpff3k" path="res://Sprites/Coin.png" id="6_dbilb"]
+[ext_resource type="PackedScene" uid="uid://b8ng2f0kix2nq" path="res://Scenes/healthbar.tscn" id="7_t0sp1"]
+[ext_resource type="Texture2D" uid="uid://f3gj2ata34cr" path="res://Sprites/Ynnub.png" id="9_8puhv"]
+[ext_resource type="Texture2D" uid="uid://bhcqnuyt5ji8e" path="res://icon.svg" id="11_l45qo"]
+
+[sub_resource type="Theme" id="Theme_m1164"]
+
+[sub_resource type="Theme" id="Theme_d5ep4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e0o2e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bwvyr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbk7s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nupyr"]
+atlas = ExtResource("4_u16kd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j8wa6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nupyr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsrrx"]
+atlas = ExtResource("5_0dwpm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0h13f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsrrx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2n5qm"]
+atlas = ExtResource("6_dbilb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_barjr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2n5qm")
+}],
+"loop": true,
+"name": &"Coin_Icon",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_5qwwm"]
+resource_name = "Fade Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b1nkf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_camfc"]
+resource_name = "Fade In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1mqvm"]
+_data = {
+"Fade In": SubResource("Animation_camfc"),
+"Fade Out": SubResource("Animation_5qwwm"),
+"RESET": SubResource("Animation_b1nkf")
+}
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -69.0
+offset_right = 172.0
+offset_bottom = 65.0
+grow_vertical = 2
+theme = SubResource("Theme_m1164")
+script = ExtResource("1_311b3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_right = 284.254
+offset_bottom = 140.0
+texture = ExtResource("9_8puhv")
+expand_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 2.0
+offset_right = 309.0
+offset_bottom = 61.0
+texture = ExtResource("3_5od8k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 21.0
+offset_top = -34.0
+offset_right = 83.0
+offset_bottom = 43.0
+grow_vertical = 2
+theme = SubResource("Theme_d5ep4")
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e0o2e")
+theme_override_styles/hover = ExtResource("2_ll2mf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_e0o2e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_e0o2e")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e0o2e")
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bwvyr")
+theme_override_styles/hover = ExtResource("2_ll2mf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bwvyr")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bwvyr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bwvyr")
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kbk7s")
+theme_override_styles/hover = ExtResource("2_ll2mf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kbk7s")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kbk7s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kbk7s")
+text = "Quit"
+
+[node name="Player" parent="." instance=ExtResource("2_n80jq")]
+position = Vector2(-81, 215)
+
+[node name="UIManager" type="CanvasLayer" parent="."]
+layer = 10
+visible = false
+script = ExtResource("3_de4id")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UIManager"]
+position = Vector2(14, 127)
+scale = Vector2(1.75, 1.625)
+sprite_frames = SubResource("SpriteFrames_j8wa6")
+
+[node name="Key Icon" type="AnimatedSprite2D" parent="UIManager"]
+position = Vector2(191, 126)
+sprite_frames = SubResource("SpriteFrames_0h13f")
+
+[node name="KeyDisplay" type="Label" parent="UIManager/Key Icon"]
+offset_left = 7.0
+offset_top = -12.0
+offset_right = 47.0
+offset_bottom = 11.0
+text = "0
+"
+
+[node name="Coin Icon" type="AnimatedSprite2D" parent="UIManager"]
+z_index = 1
+position = Vector2(224, 126)
+sprite_frames = SubResource("SpriteFrames_barjr")
+animation = &"Coin_Icon"
+
+[node name="CoinDisplay" type="Label" parent="UIManager/Coin Icon"]
+offset_left = 8.0
+offset_top = -12.0
+offset_right = 48.0
+offset_bottom = 11.0
+text = "0"
+
+[node name="Healthbar" parent="UIManager" instance=ExtResource("7_t0sp1")]
+offset_left = 136.0
+offset_top = 135.0
+offset_right = -117.0
+offset_bottom = -5.0
+
+[node name="Pause Menu" type="ColorRect" parent="UIManager"]
+visible = false
+custom_minimum_size = Vector2(128, 94)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -61.0
+offset_right = 64.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.243137, 0.141176, 0.0509804, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIManager/Pause Menu"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 122.0
+offset_bottom = 88.0
+
+[node name="ResumeBox" type="HBoxContainer" parent="UIManager/Pause Menu/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="UIManager/Pause Menu/VBoxContainer/ResumeBox"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+text = "Resume"
+
+[node name="RestartBox" type="HBoxContainer" parent="UIManager/Pause Menu/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Restart" type="Button" parent="UIManager/Pause Menu/VBoxContainer/RestartBox"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+text = "Restart
+"
+
+[node name="QuitBox" type="HBoxContainer" parent="UIManager/Pause Menu/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Quit" type="Button" parent="UIManager/Pause Menu/VBoxContainer/QuitBox"]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+text = "Quit
+"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_1mqvm")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 0)
+position = Vector2(136.5, 75)
+scale = Vector2(2.50781, 1.48438)
+texture = ExtResource("11_l45qo")
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/ResumeBox/Resume" to="UIManager" method="_on_resume_pressed"]
+[connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/RestartBox/Restart" to="UIManager" method="_on_restart_pressed"]
+[connection signal="pressed" from="UIManager/Pause Menu/VBoxContainer/QuitBox/Quit" to="UIManager" method="_on_quit_pressed"]

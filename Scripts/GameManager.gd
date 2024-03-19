@@ -2,6 +2,9 @@ extends Node
 
 signal gained_coins(int)
 var coins : int
+signal gained_keys(int)
+var keys : int
+
 var current_checkpoint : Checkpoint
 var healthbar:Healthbar
 var player : Player
@@ -20,6 +23,10 @@ func gain_coins(coins_gained:int):
 	coins += coins_gained
 	emit_signal("gained_coins", coins_gained)
 	
+func gain_keys(keys_gained:int):
+	keys += keys_gained
+	emit_signal("gained_keys", keys_gained)
+	
 func pause_play():
 	paused = !paused
 	pause_menu.visible = paused
@@ -29,6 +36,7 @@ func resume():
 
 func restart():
 	coins = 0
+	keys = 0
 	get_tree().reload_current_scene()
 
 func quit():

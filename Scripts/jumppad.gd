@@ -12,6 +12,7 @@ func _on_area_2d_area_entered(area):
 	if area.get_parent() is Player:
 		bounce = true
 		if bounce == true:
+			AudioManager.jump_pad_sfx.play()
 			$AnimatedSprite2D.play("default")
 			area.get_parent().velocity.y = force
 			bounce = false

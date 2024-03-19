@@ -49,6 +49,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and jumps_left > 0:
+		AudioManager.jump_sfx.play()
 		velocity.y = jump_velocity
 		jumps_left -= 1
 		
@@ -92,6 +93,7 @@ func take_damage(damage_amount:int):
 	
 	if can_take_damage:
 		iframes()
+		AudioManager.hurt_sfx.play()
 		health -= damage_amount
 		
 		if health <= 0:

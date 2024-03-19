@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://cw4ebd5amgc0x"]
+
+[ext_resource type="Script" path="res://Scripts/AudioManager.gd" id="1_1easx"]
+[ext_resource type="AudioStream" uid="uid://ds8jec0wqgpn2" path="res://Sounds/386643__jalastram__sfx_jump_11.wav" id="2_41m2d"]
+[ext_resource type="AudioStream" uid="uid://siakuws7oijn" path="res://Sounds/386652__jalastram__sfx_jump_33.wav" id="3_i6at8"]
+[ext_resource type="AudioStream" uid="uid://lr64n4xtklbu" path="res://Sounds/160503__timmy_h123__item_05.wav" id="4_khkt5"]
+[ext_resource type="AudioStream" uid="uid://bi62lasysrpwg" path="res://Sounds/463202__kenneth_cooney__one_beep.wav" id="5_3cips"]
+[ext_resource type="AudioStream" uid="uid://pti3cj0w3vbh" path="res://Sounds/270326__littlerobotsoundfactory__hit_01.wav" id="6_028qb"]
+[ext_resource type="AudioStream" uid="uid://cwwr87icj4kfq" path="res://Sounds/1min-2021-08-16_-_8_Bit_Adventure_-_www.FesliyanStudios.com.mp3" id="7_0de08"]
+[ext_resource type="AudioStream" uid="uid://ld4imqqkgw4e" path="res://Sounds/456631__bumpelsnake__select8.wav" id="7_av051"]
+[ext_resource type="AudioStream" uid="uid://dv7y503my5rsc" path="res://Sounds/506016__deathscyp__checkpoint.wav" id="8_c2lpm"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_1easx")
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_41m2d")
+volume_db = -33.763
+pitch_scale = 0.72
+
+[node name="JumpPadSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i6at8")
+volume_db = -16.456
+pitch_scale = 0.88
+
+[node name="CoinSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_khkt5")
+volume_db = -16.456
+pitch_scale = 0.88
+
+[node name="HealthSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_3cips")
+volume_db = -16.456
+pitch_scale = 0.88
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_028qb")
+volume_db = -16.456
+pitch_scale = 0.88
+
+[node name="SelectSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_av051")
+volume_db = -10.338
+pitch_scale = 0.88
+
+[node name="CheckPointSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_c2lpm")
+volume_db = -10.721
+pitch_scale = 0.98
+attenuation = 2.54911
+
+[node name="JumpPadSFX7" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i6at8")
+volume_db = -16.456
+pitch_scale = 0.88
+
+[node name="JumpPadSFX8" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i6at8")
+volume_db = -16.456
+pitch_scale = 0.88
+
+[node name="JumpPadSFX9" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i6at8")
+volume_db = -16.456
+pitch_scale = 0.88
+
+[node name="AdventureMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_0de08")
+volume_db = -30.985
+pitch_scale = 0.97
