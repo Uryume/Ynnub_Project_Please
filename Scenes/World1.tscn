@@ -556,6 +556,18 @@ layout_mode = 2
 text = "Quit
 "
 
+[node name="Label" type="Label" parent="UIManager/Pause Menu"]
+offset_left = -64.0
+offset_top = -9.0
+offset_right = 57.0
+offset_bottom = 92.0
+scale = Vector2(0.523859, 0.518422)
+text = "Move: W,A,S,D
+Jump: Spacebar
+Attack:LMB
+Menu:Esc
+"
+
 [node name="Checkpoint" parent="." instance=ExtResource("8_mdqno")]
 position = Vector2(393, 76)
 
