@@ -13,6 +13,8 @@ const dash_speed = 1000
 const dash_duration = 0.2
 @onready var dash = $Dash
 
+var total_lives = 5
+
 var max_health = 10
 var health = 0
 var can_take_damage = true
@@ -98,6 +100,9 @@ func take_damage(damage_amount:int):
 		
 		if health <= 0:
 			die()
+			total_lives-1
+			if total_lives == 0:
+				print("You Lose!")
 			
 func iframes():
 	can_take_damage = false
